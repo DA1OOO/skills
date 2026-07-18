@@ -1,0 +1,4 @@
+interface:
+  display_name: "配置 ChatGPT 独立代理组"
+  short_description: "为 ChatGPT/OpenAI 流量建立并验证独立代理组"
+  default_prompt: "使用 $manage-clash-chatgpt-proxy 为 ChatGPT/OpenAI 流量建立独立代理组并验证路由。"
