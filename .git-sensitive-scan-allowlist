@@ -1,0 +1,2 @@
+# The scanner source contains literal secret signatures used by its detection rules.
+guard-git-push-secrets/scripts/scan_push.py

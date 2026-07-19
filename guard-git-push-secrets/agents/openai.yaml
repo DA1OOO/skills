@@ -1,0 +1,4 @@
+interface:
+  display_name: "Git Push 敏感信息守卫"
+  short_description: "Scan outbound Git commits before every push"
+  default_prompt: "Use $guard-git-push-secrets to install automatic sensitive-file checks before every git push."
