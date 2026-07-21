@@ -1,0 +1,4 @@
+interface:
+  display_name: "HTML 原样转 PDF"
+  short_description: "保留网页屏幕版式、图片与背景，生成连续长页 PDF"
+  default_prompt: "Use $html-to-exact-pdf to convert this local HTML file into a visually faithful PDF and verify the rendered output."

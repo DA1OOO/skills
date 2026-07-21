@@ -8,6 +8,7 @@
 | --- | --- |
 | [`manage-clash-chatgpt-proxy`](./manage-clash-chatgpt-proxy/) | 为 ChatGPT/OpenAI 流量建立并维护独立代理组。 |
 | [`guard-git-push-secrets`](./guard-git-push-secrets/) | 在每次 Git push 前扫描待推送提交中的敏感文件与凭据。 |
+| [`html-to-exact-pdf`](./html-to-exact-pdf/) | 保留网页屏幕版式、背景与图片，生成连续长页 PDF。 |
 
 ## manage-clash-chatgpt-proxy
 
@@ -84,6 +85,33 @@ python3 ./guard-git-push-secrets/scripts/install.py \
   --uninstall
 ```
 
+## html-to-exact-pdf
+
+用于把本地 HTML 按浏览器中的屏幕样式生成连续长页 PDF，适合旅行攻略、作品集、报告、落地页等设计型网页。Skill 使用 Chromium 完成真实渲染，而不是依赖浏览器普通打印样式。
+
+主要能力：
+
+- 保留网页背景、颜色、图片与桌面端布局。
+- 尽量直接获取远程图片并转成内嵌数据，不向第三方图片代理转发 URL。
+- 保留源 HTML 的基准路径，避免相对 CSS、图片、字体和脚本在临时目录中失效。
+- 冻结 `vh`、`vw` 等视口尺寸，避免 PDF 输出时封面或版块异常拉长。
+- 自动滚动页面以触发懒加载图片，并等待图片和字体加载。
+- 生成无页眉、页脚、日期、URL 和页码的连续长页 PDF。
+- 检查 PDF 页数和尺寸，并生成 PNG 预览供视觉确认。
+
+调用示例：
+
+```text
+使用 $html-to-exact-pdf 把 /path/to/travel-guide.html 按网页原样生成 PDF，并检查最终版式。
+```
+
+核心脚本：
+
+```text
+html-to-exact-pdf/scripts/render_exact_pdf.mjs
+html-to-exact-pdf/scripts/verify_pdf.py
+```
+
 ## 目录结构
 
 ```text
@@ -98,6 +126,13 @@ skills/
 │       ├── install.py
 │       ├── scan_push.py
 │       └── self_test.py
+├── html-to-exact-pdf/
+│   ├── SKILL.md
+│   ├── agents/
+│   │   └── openai.yaml
+│   └── scripts/
+│       ├── render_exact_pdf.mjs
+│       └── verify_pdf.py
 └── manage-clash-chatgpt-proxy/
     ├── SKILL.md
     └── agents/
